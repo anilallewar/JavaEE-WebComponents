@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
+	
+	<tlib-version>1.2</tlib-version>
+	<short-name>CustomTags</short-name>
+	<uri>http://com.anil.tags.customtags</uri>
+	
+	<tag>
+		<description>Used to output the passed value with the specified format</description>
+		<name>output</name>
+		<tag-class>com.anil.tags.OutputTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description>Pass the string/expression that is to be printed</description>
+			<name>output</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Pass the font color in which you want the message to be displayed</description>
+			<name>fontColor</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>This tag will iterate the contents provided in the list passed and 
+	 				write it to the tag body one by one </description>
+		<name>iterate</name>
+		<tag-class>com.anil.tags.IterateTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description>Pass the List that is to be printed</description>
+			<name>items</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Pass the variable which will hold the value of the Object in each iteration. This tag should also be put 
+				in the body with ${varName} notation so that it can be printed as you want it</description>
+			<name>varName</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>This tag throw a SkipPageException to the response </description>
+		<name>throwexception</name>
+		<tag-class>com.anil.tags.SkipPageExceptionThrowTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	
+	<tag>
+		<description>This is a classic tag to show some custom messages and the body</description>
+		<name>classicoutput</name>
+		<tag-class>com.anil.tags.ClassicOutputTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description>Pass the string/expression that is to be printed</description>
+			<name>output</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>This CLASSIC tag will iterate the contents provided in the list passed and 
+	 				write it to the tag body one by one </description>
+		<name>classiciterate</name>
+		<tag-class>com.anil.tags.ClassicIterateTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<description>Pass the List that is to be printed</description>
+			<name>listitems</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Pass the variable which will hold the value of the Object in each iteration. This tag should also be put 
+				in the body with ${varName} notation so that it can be printed as you want it</description>
+			<name>variable</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>This tag will iterate the contents provided in the list passed and create
+	 		a HTML SELECT list from the same </description>
+		<name>createSelect</name>
+		<tag-class>com.anil.tags.DynamicSelectTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<description>Pass the List that is to converted to select</description>
+			<name>items</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description>Pass the name/id with which the select list will be known</description>
+			<name>name</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	
+	<tag>
+		<description>This parent tag will iterate the menu items provided by the child tag and can
+			be used to build menus. </description>
+		<name>menu</name>
+		<tag-class>com.anil.tags.MenuParentTag</tag-class>
+		<body-content>scriptless</body-content>
+	</tag>
+	
+	<tag>
+		<description>This child tag will provide the menu items</description>
+		<name>menuitem</name>
+		<tag-class>com.anil.tags.MenuItemChildTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<description>The menu item to be passed which will always be a String</description>
+			<name>itemValue</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>This tag is sample</description>
+		<name>printbody</name>
+		<tag-class>com.anil.tags.PrintBodyTag</tag-class>
+		<body-content>tagdependent</body-content>
+	</tag>
+	
+</taglib>

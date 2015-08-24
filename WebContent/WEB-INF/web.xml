@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>SCJWDAnil</display-name>
+
+	<!-- Anil Allewar changes START -->
+
+	<!--The Context initilization parameters are available as a String and available to all the Servlets 
+			and JSPs deployed in this web application -->
+	<context-param>
+		<param-name>ContextAdminEmail</param-name>
+		<param-value>IAmApplicationAdmin@Application.com</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>Description</param-name>
+		<param-value>I am available to all the Servlets and JSPs in the SCJWDAnil web app</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>DataSourceName</param-name>
+		<param-value>jdbc/mobileportal</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>DogBreed</param-name>
+		<param-value>Great Dane</param-value>
+	</context-param>
+	<!-- context parameters END -->
+
+	<!--The Listener listen to various events and are called once the event happens -->
+	<listener>
+		<listener-class>com.anil.listenerexample.listners.BeerAppContextListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>com.anil.listenerexample.model.Cat</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>com.anil.listenerexample.listners.RequestAttributeTestServlet</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>com.anil.listenerexample.listners.BeerAppSessionListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>com.anil.listenerexample.listners.BeerAppSessionAttributeListener</listener-class>
+	</listener>
+
+	<!--Listener definition ends -->
+
+	<servlet>
+		<description>Basic servlet for testing</description>
+		<servlet-name>Basic Servlet</servlet-name>
+		<servlet-class>com.anil.servlets.BasicServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Basic Servlet</servlet-name>
+		<url-pattern>/basicservlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Beer Select</servlet-name>
+		<servlet-class>com.anil.BeerApp.servlets.BeerSelectServlet</servlet-class>
+		<!-- The initialization parameter available via ServletConfig -->
+		<init-param id="ParamValue_1231091958546">
+			<param-name>adminEmail</param-name>
+			<param-value>anil.allewar@opussoft.com</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Beer Select</servlet-name>
+		<url-pattern>/BeerApp/selectBeer.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>Servlet API Test Servlet</display-name>
+		<servlet-name>Servlet API Test Servlet</servlet-name>
+		<servlet-class>com.anil.BeerApp.servlets.ServletAPITestServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Servlet API Test Servlet</servlet-name>
+		<url-pattern>/servletAPITest</url-pattern>
+	</servlet-mapping>
+		
+	<servlet>
+		<servlet-name>Initialization Test Servlet</servlet-name>
+		<servlet-class>com.anil.BeerApp.servlets.InitParameterTestServlet</servlet-class>
+		<!--The initilization parameters are available as a String and available only to this Servlet-->
+		<init-param>
+			<param-name>ServletAdminEmail</param-name>
+			<param-value>IAmServletAdmin@servlet.com</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>Description</param-name>
+			<param-value>I am available only to the Initialization Test Servlet</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Initialization Test Servlet</servlet-name>
+		<url-pattern>/BeerApp/initTesting.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ThreadSafeContextServlet</servlet-name>
+		<servlet-class>com.anil.listenerexample.servlets.ThreadSafeContextServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ThreadSafeContextServlet</servlet-name>
+		<url-pattern>/threadSafeContext.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RequestAttributeTestServlet</servlet-name>
+		<servlet-class>com.anil.listenerexample.listners.RequestAttributeTestServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RequestAttributeTestServlet</servlet-name>
+		<url-pattern>/requestAttributeTest.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SessionTestingServlet</servlet-name>
+		<servlet-class>com.anil.listenerexample.servlets.SessionTestingServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SessionTestingServlet</servlet-name>
+		<url-pattern>/sessionTestingServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>HobbyServlet</servlet-name>
+		<servlet-class>com.anil.servlets.HobbyServlet</servlet-class>
+		<security-role-ref>
+			<role-name>Funky</role-name>
+			<role-link>guest</role-link>
+		</security-role-ref>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>HobbyServlet</servlet-name>
+		<url-pattern>/hobbyOut.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>HobbyInputJSP</servlet-name>
+		<jsp-file>/jsps/HobbyInput.jsp</jsp-file>
+		<init-param>
+			<param-name>HobbyInputParam</param-name>
+			<param-value>AnilTestingHobbyInput</param-value>
+		</init-param>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>HobbyInputJSP</servlet-name>
+		<url-pattern>/jsps/HobbyInput.jsp</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SimpleServlet</servlet-name>
+		<servlet-class>com.anil.servlets.AutoRefreshForwardServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>SimpleServlet</servlet-name>
+		<url-pattern>/jsps/simpleServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>JSPActionServlet</servlet-name>
+		<servlet-class>com.anil.servlets.JSPActionTestServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>JSPActionServlet</servlet-name>
+		<url-pattern>/actionTestServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>JSTLTestServlet</servlet-name>
+		<servlet-class>com.anil.servlets.JSTLTestServlet</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>JSTLTestServlet</servlet-name>
+		<url-pattern>/jstlTestServlet</url-pattern>
+	</servlet-mapping>
+	
+	<!--Filter and mappings START-->
+	<filter>
+		<filter-name>RequestTracking</filter-name>
+		<filter-class>com.anil.filters.RequestTrackingFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>RequestTracking</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>CompressResponse</filter-name>
+		<filter-class>com.anil.filters.CompressOutputFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>CompressResponse</filter-name>
+		<servlet-name>SimpleServlet</servlet-name>
+	</filter-mapping>
+	<!--Filter and mappings END-->
+	
+	<!-- Session configuration parameters -->
+	<session-config>
+		<!-- The session timeout in DD is set in minutes while programatically it is set in seconds -->
+		<session-timeout>20</session-timeout>
+	</session-config>
+	<!-- Anil Allewar changes END -->
+
+	<!-- Scripting invalid parameters -->
+	<jsp-config>
+		<!-- The mapping is required only if you place the tag library at some location outside the 
+			/WEB-INF path(i.e. within WEB-INF directory or META-INF of the jar file) -->
+		<taglib>
+			<taglib-uri>/tlds/DiceFunctions</taglib-uri>
+			<taglib-location>/tlds/rollDice.tld</taglib-location>
+		</taglib>
+		<jsp-property-group>
+			<url-pattern>/jsps/HobbyInput.jsp</url-pattern>
+			<!-- This paramters scecifies that JSP scripting is invalid for above mentioned URL pattern -->
+			<scripting-invalid>
+				true
+			</scripting-invalid>
+		</jsp-property-group>
+	</jsp-config>
+	
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- Error page configuration -->
+	<error-page>
+    	<error-code>404</error-code>
+    	<location>/jsps/ErrorPage.jsp?errorCode=404</location>
+  	</error-page>
+	
+	<error-page>
+    	<error-code>500</error-code>
+    	<location>/jsps/ErrorPage.jsp?errorCode=500</location>
+  	</error-page>
+	
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/jsps/ErrorPage.jsp</location>
+	</error-page>
+	
+	<!--Authentication and authorization
+	        1. The user, user-role and their mapping is specified in vendor specific 
+	        data file. For tomcat it is {Tomcat-home}/conf/tomcat-users.xml
+	 		2. If no <http-method> is provided in the security constraint then all the 
+	 		HTTP methods are constrained by default.
+	 		3. If at least one <http-method> is provided in the security constraint, then all
+	 		other HTTP methods become accessible to everyone by default. So if you put in GET
+	 		method as constrained, then all users(irrespective of role or authentication) can 
+	 		access the resource.      
+	-->
+	
+	<!--This login config states that the authentication methodology to be used -->
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/loginPage.jsp</form-login-page>
+			<form-error-page>/loginError.jsp</form-error-page>
+		</form-login-config>
+	</login-config>
+	
+	<!--This maps the vendor-specifc role to the role-name defined in the DD.
+		The role referenced in a <security-role> tag has NO effect on its use in
+		the <auth-constraint> element of a <security-constraint>. 
+		However if you want to use app-managed authentication using request.isUserInRole(),
+		then the roles need to be defined under the <security-role> tag for them to be used.
+	-->
+	
+	<security-role>
+		<role-name>admin</role-name>		
+	</security-role>
+	
+	<security-role>
+		<role-name>supervisor</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>member</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>guest</role-name>
+	</security-role>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>
+				refresh
+			</web-resource-name>	
+			
+			<url-pattern>/jsps/simpleServlet</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>guest</role-name>
+		</auth-constraint>
+		<!--This is to ensure that the container requests SSL for this request-->
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>
+				hobby
+			</web-resource-name>	
+			
+			<url-pattern>/jsps/HobbyInput.jsp</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>guest</role-name>
+			<role-name>admin</role-name>
+			<role-name>member</role-name>
+		</auth-constraint>
+	</security-constraint>
+</web-app>

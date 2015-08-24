@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>mailto Example</title>
+	<script language="JavaScript">
+			
+		function ADFLisa() {
+
+			alert(this);
+
+			try{
+				if (window.document){
+					document.getSubIdElement = function(path) { 
+						alert(this + path.substring(1)); 
+					}
+					document.isSubId = function(path){
+						//This works because you are invoking the function of the same "this" document object
+						this.getSubIdElement("Passing in isSubId() function: " + path);
+						return path != null && path.charAt(0) == '#'; 
+					}
+					//These functions are ONLY available within the context of this TRY block
+					document.getSubIdElement ("Anil");
+					alert(document.isSubId("Anil"));
+				}
+			}catch(e){
+				alert('error:' + e.message);
+			}
+		}
+	
+		/*
+			Every constructor function has a property named prototype.
+			"prototype" is an object that holds the instance properties and instance methods for the object.
+			So you would have to define any new methods on the base object using the prototype object.
+		*/
+		ADFLisa.prototype.check = function(path){
+			alert(path);
+		}
+
+		var adfLisa = new ADFLisa();
+		
+		function AddToCart() {
+				var sSize = "", iSize = 0;
+				//alert("Allewar:" + document.CheckBoxForm.size.length);
+				for (iSize = 0; iSize < document.CheckBoxForm.size.length; iSize++)
+				{
+					//alert(eval(document.CheckBoxForm.size(iSize).checked));
+					if(document.CheckBoxForm.size(iSize).checked == true)
+					{
+						sSize = document.CheckBoxForm.size(iSize).value;
+						break;
+					}
+				}
+				//alert("Allewar1");
+		        alert("price: "+document.CheckBoxForm.price.value + ". size: " + sSize + ". Instructions: " + document.CheckBoxForm.instructions.value);
+		    }   
+	</script>
+	
+</head>
+
+<body>
+	<form action="mailto:anil.allewar@synerzip.com" method="post" enctype="text/plain" name="myForm">
+		FirstName:<input type="text" name="FirstName">
+		Email:<input type="text" name="Email">
+		<input type="submit" name="submit1" value="Submit">
+	</form>
+	
+	<form name="CheckBoxForm" method="post" action="mailto:anil.allewar@synerzip.com">
+	  	<input type='hidden' name='checkActive' value='true'/>
+      	<input type="hidden" name="SearchOption" value='<%=request.getParameter("SearchOption")%>'/>
+      	<input type="hidden" name="originator_account_id" value='<%=request.getParameter("originator_account_id")%>'/>
+      	<input type="hidden" name="recipient_account_id" value='<%=request.getParameter("recipient_account_id")%>'/>
+      	<input type="hidden" name="doc_type" value='<%=request.getParameter("doc_type")%>'/>
+      	<input type="hidden" name="charge_code" value='<%=request.getParameter("charge_code")%>'/>
+       	<input type="hidden" name="submit1" value='List'/>
+	
+	    <table width="50%" border="0" cellspacing="0" cellpadding="0">
+	    	<tr>  
+				<td width='5%'class = "txt-label" align ='right'/>
+	 				
+	 			<td width='5%'class = "txt-label" align ='left'>
+					<INPUT TYPE="checkbox" checked='<%=checkActive%>' onclick='document.CheckBoxForm.submit();' NAME="checkActive">
+				</td>
+	
+				<td width='5%'class = "txt-label" align ='right'>
+				
+				<td width='5%'class = "txt-label" align ='left'>  
+					<INPUT  NAME="checkInActive" TYPE="checkbox" checked='<%=checkInActive%>' onclick='document.CheckBoxForm.submit();'>
+				</td>
+	
+				<td width='5%'class = "txt-label" align ='left'>  
+					<INPUT  NAME="anil" TYPE="checkbox" onclick='adfLisa.check("some checking");'>
+				</td>
+
+			</tr>
+	    </table>
+	     
+	      <input type="hidden" name="price" value="19.95"/>
+           
+     	<input type="radio" name="size" value="S"/>small<br />
+     	<input type="radio" name="size" value="M"/>medium<br />
+     	<input type="radio" name="size" value="L" checked="checked"/>large<br />
+ 
+     Instructions:<br /> <textarea name="instructions" cols=40 rows=2></textarea><br />
+ 
+     	<input type="button" value="Add to Order"  onClick='AddToCart();'/>     
+	          
+	 </form>
+	</body>
+</html>
